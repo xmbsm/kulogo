@@ -22,9 +22,12 @@ export default function Home() {
   const [currentSvg, setCurrentSvg] = useState<iSVG | null>(null);
   const [copyingSvg, setCopyingSvg] = useState<iSVG | null>(null);
   const [displayedCount, setDisplayedCount] = useState(35); // 默认显示35个logo
+  const [sortOption, setSortOption] = useState<string>("recent"); // 排序选项：default, recent, alphabetical
+  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false); // 移动端分类菜单状态
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 移动端导航菜单状态
 
   const filteredSvgs = useMemo(() => {
-    return svgs.filter((svg) => {
+    let result = svgs.filter((svg) => {
       const matchesSearch =
         svg.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         svg.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -33,16 +36,35 @@ export default function Home() {
         : true;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+
+    // 排序
+    switch (sortOption) {
+      case "recent":
+        // 按id降序排序（假设id越大越新）
+        result.sort((a, b) => b.id - a.id);
+        break;
+      case "alphabetical":
+        // 按标题A-Z排序
+        result.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "default":
+      default:
+        // 保持默认顺序
+        break;
+    }
+
+    return result;
+  }, [searchQuery, selectedCategory, sortOption]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     document.documentElement.classList.toggle("dark");
   };
 
-  // 当搜索或分类变化时，重置显示数量
+  // 当搜索或分类变化时，重置显示数量和排序选项
   useEffect(() => {
     setDisplayedCount(35);
+    setSortOption("recent");
   }, [searchQuery, selectedCategory]);
 
   const toggleLogoSelection = (id: number) => {
@@ -288,14 +310,26 @@ export default function Home() {
       <div className="min-h-screen bg-background text-foreground">
         <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">SV</span>
+            <div className="flex items-center h-16">
+              <div className="flex items-center gap-8">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">SV</span>
+                  </div>
+                  <span className="font-bold text-xl">SVG Logo</span>
                 </div>
-                <span className="font-bold text-xl">SVG Logo</span>
+                
+                {/* 桌面端菜单 */}
+                <div className="hidden md:flex items-center gap-6">
+                  <a href="#" className="text-foreground hover:text-primary transition-colors">首页</a>
+                  <a href="#" className="text-foreground hover:text-primary transition-colors">关于我们</a>
+                  <a href="#" className="text-foreground hover:text-primary transition-colors">赞助支持</a>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">GitHub</a>
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">Twitter</a>
+                </div>
               </div>
-              <div className="flex items-center gap-4">
+              
+              <div className="ml-auto flex items-center gap-4">
                 {selectedLogos.size > 0 && (
                   <button
                     onClick={handleBatchDownload}
@@ -311,157 +345,364 @@ export default function Home() {
                 >
                   {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>
+                {/* 移动端菜单按钮 */}
+                <button 
+                  className="md:hidden p-2 rounded-lg hover:bg-accent transition-colors"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
+          
+          {/* 移动端菜单 */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-background shadow-lg z-40">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+                <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors">首页</a>
+                <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors">关于我们</a>
+                <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors">赞助支持</a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">GitHub</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">Twitter</a>
+              </div>
+            </div>
+          )}
         </nav>
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              SVG Logo 素材库
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              专注收录国内矢量 Logo 的开源站点，支持在线浏览、检索、复制与下载
-            </p>
-          </div>
-
-          <div className="mb-8">
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-              <input
-                type="text"
-                placeholder="搜索 Logo..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-accent border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedCategory("")}
-                className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all",
-                  selectedCategory === ""
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-accent hover:bg-accent/80"
-                )}
-              >
-                全部
-              </button>
-              {categories.map((category) => (
-                <button
-                  key={category.slug}
-                  onClick={() => setSelectedCategory(category.slug)}
-                  className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium transition-all",
-                    selectedCategory === category.slug
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-accent hover:bg-accent/80"
-                  )}
-                >
-                  {category.name} ({category.count})
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {filteredSvgs.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-muted-foreground text-lg">
-                没有找到匹配的 Logo
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-12">
+            {/* 左侧内容 */}
+            <div className="lg:w-1/2">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-green-500 font-medium">{svgs.length}+ 矢量标志</span>
+              </div>
+              <h1 className="text-4xl font-bold mb-4">
+                国内矢量标志收录
+              </h1>
+              <p className="text-muted-foreground mb-6">
+                专注收录国内矢量 LOGO，免费在线下载矢量 LOGO 素材，为设计师和开发者提供高质量的品牌标识资源。
+              </p>
+              <div className="border-l-2 border-border pl-4">
+                <p className="text-sm text-muted-foreground">上次更新时间:</p>
+                <p className="text-sm font-medium">2026-04-09</p>
               </div>
             </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                <AnimatePresence>
-                  {filteredSvgs.slice(0, displayedCount).map((svg) => (
-                    <motion.div
-                      key={svg.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="group"
-                    >
-                      <div
-                        className="relative bg-card border border-border rounded-xl p-4 hover:shadow-lg transition-all cursor-pointer"
-                        onClick={() => openModal(svg)}
-                      >
-                        <div className={cn(
-                          "absolute top-2 right-2 transition-opacity z-10",
-                          selectedLogos.has(svg.id) ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                        )}>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleLogoSelection(svg.id);
-                            }}
-                            className={cn(
-                              "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors",
-                              selectedLogos.has(svg.id)
-                                ? "bg-primary border-primary text-primary-foreground"
-                                : "border-border hover:border-primary"
-                            )}
-                          >
-                            {selectedLogos.has(svg.id) && (
-                              <div className="w-2 h-2 bg-current rounded-full" />
-                            )}
-                          </button>
-                        </div>
-
-                        <div className="aspect-square flex items-center justify-center mb-3">
+            
+            {/* 右侧最近更新的logo */}
+            <div className="lg:w-1/2 w-full">
+              <div className="space-y-1.5">
+                {/* 第一行：向右滚动 */}
+                <div className="relative overflow-hidden h-16">
+                  <div className="flex gap-3 animate-scroll-right">
+                    {[...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(0, 12), ...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(0, 12)].map((svg, index) => (
+                        <div key={`${svg.id}-${index}`} className="w-12 h-12 bg-card border border-border rounded-lg flex items-center justify-center p-2 flex-shrink-0">
                           <img
                             src={getRoutePath(svg.route)}
                             alt={svg.title}
                             className="max-w-full max-h-full object-contain"
                           />
                         </div>
-                        <div className="text-center">
-                          <h3 className="font-medium text-sm truncate">{svg.title}</h3>
-                          <p className="text-xs text-muted-foreground">{svg.category}</p>
+                      ))}
+                  </div>
+                  {/* 左侧渐变遮罩 */}
+                  <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+                  {/* 右侧渐变遮罩 */}
+                  <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+                </div>
+                
+                {/* 第二行：向左滚动 */}
+                <div className="relative overflow-hidden h-16">
+                  <div className="flex gap-3 animate-scroll-left">
+                    {[...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(12, 24), ...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(12, 24)].map((svg, index) => (
+                        <div key={`${svg.id}-${index}`} className="w-12 h-12 bg-card border border-border rounded-lg flex items-center justify-center p-2 flex-shrink-0">
+                          <img
+                            src={getRoutePath(svg.route)}
+                            alt={svg.title}
+                            className="max-w-full max-h-full object-contain"
+                          />
                         </div>
+                      ))}
+                  </div>
+                  {/* 左侧渐变遮罩 */}
+                  <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+                  {/* 右侧渐变遮罩 */}
+                  <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+                </div>
+                
+                {/* 第三行：向右滚动 */}
+                <div className="relative overflow-hidden h-16">
+                  <div className="flex gap-3 animate-scroll-right">
+                    {[...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(24, 36), ...svgs
+                      .sort((a, b) => b.id - a.id)
+                      .slice(24, 36)].map((svg, index) => (
+                        <div key={`${svg.id}-${index}`} className="w-12 h-12 bg-card border border-border rounded-lg flex items-center justify-center p-2 flex-shrink-0">
+                          <img
+                            src={getRoutePath(svg.route)}
+                            alt={svg.title}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                      ))}
+                  </div>
+                  {/* 左侧渐变遮罩 */}
+                  <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+                  {/* 右侧渐变遮罩 */}
+                  <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                        <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 rounded-xl">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleCopy(svg, e);
-                            }}
-                            className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-                          >
-                            <Copy className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDownload(svg);
-                            }}
-                            className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-                          >
-                            <Download className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+          <div className="relative mb-6">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+            <input
+              type="text"
+              placeholder="搜索 Logo..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 bg-accent border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-muted-foreground">排序：</span>
+              <button
+                onClick={() => setSortOption("default")}
+                className={cn(
+                  "px-3 py-1 rounded-full text-sm font-medium transition-all",
+                  sortOption === "default"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-accent hover:bg-accent/80"
+                )}
+              >
+                默认排序
+              </button>
+              <button
+                onClick={() => setSortOption("recent")}
+                className={cn(
+                  "px-3 py-1 rounded-full text-sm font-medium transition-all",
+                  sortOption === "recent"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-accent hover:bg-accent/80"
+                )}
+              >
+                最近更新
+              </button>
+              <button
+                onClick={() => setSortOption("alphabetical")}
+                className={cn(
+                  "px-3 py-1 rounded-full text-sm font-medium transition-all",
+                  sortOption === "alphabetical"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-accent hover:bg-accent/80"
+                )}
+              >
+                A-Z排序
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* 左侧边栏分类筛选 */}
+            <div className="lg:w-64 shrink-0">
+              {/* 移动端下拉菜单 */}
+              <div className="lg:hidden relative mb-4">
+                <div 
+                  className="bg-card border border-border rounded-xl p-4 cursor-pointer"
+                  onClick={() => setIsCategoryMenuOpen(!isCategoryMenuOpen)}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-medium text-lg">分类筛选</h3>
+                    <span className={`transition-transform ${isCategoryMenuOpen ? 'rotate-180' : ''}`}>▼</span>
+                  </div>
+                </div>
+                
+                {/* 下拉菜单 */}
+                {isCategoryMenuOpen && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg z-50 max-h-96 overflow-y-auto">
+                    <div className="p-4 space-y-2">
+                      <button
+                        onClick={() => {
+                          setSelectedCategory("");
+                          setIsCategoryMenuOpen(false);
+                        }}
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                          selectedCategory === ""
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-accent"
+                        )}
+                      >
+                        全部 ({svgs.length})
+                      </button>
+                      {categories.map((category) => (
+                        <button
+                          key={category.slug}
+                          onClick={() => {
+                            setSelectedCategory(category.slug);
+                            setIsCategoryMenuOpen(false);
+                          }}
+                          className={cn(
+                            "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                            selectedCategory === category.slug
+                              ? "bg-primary text-primary-foreground"
+                              : "hover:bg-accent"
+                          )}
+                        >
+                          {category.name} ({category.count})
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               
-              {displayedCount < filteredSvgs.length && (
-                <div className="text-center mt-12">
+              {/* 桌面端固定边栏 */}
+              <div className="hidden lg:block sticky top-24 bg-card border border-border rounded-xl p-4">
+                <h3 className="font-medium text-lg mb-4">分类筛选</h3>
+                <div className="space-y-2">
                   <button
-                    onClick={() => setDisplayedCount(prev => Math.min(prev + 35, filteredSvgs.length))}
-                    className="px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity"
+                    onClick={() => setSelectedCategory("")}
+                    className={cn(
+                      "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                      selectedCategory === ""
+                        ? "bg-primary text-primary-foreground"
+                        : "hover:bg-accent"
+                    )}
                   >
-                    加载更多 ({filteredSvgs.length - displayedCount} 个)
+                    全部 ({svgs.length})
                   </button>
+                  {categories.map((category) => (
+                    <button
+                      key={category.slug}
+                      onClick={() => setSelectedCategory(category.slug)}
+                      className={cn(
+                        "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                        selectedCategory === category.slug
+                          ? "bg-primary text-primary-foreground"
+                          : "hover:bg-accent"
+                      )}
+                    >
+                      {category.name} ({category.count})
+                    </button>
+                  ))}
                 </div>
+              </div>
+            </div>
+
+            {/* 主内容区域 */}
+            <div className="flex-1">
+              {filteredSvgs.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="text-muted-foreground text-lg">
+                    没有找到匹配的 Logo
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <AnimatePresence>
+                      {filteredSvgs.slice(0, displayedCount).map((svg) => (
+                        <motion.div
+                          key={svg.id}
+                          layout
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          className="group"
+                        >
+                          <div
+                            className="relative bg-card border border-border rounded-xl p-4 hover:shadow-lg transition-all cursor-pointer"
+                            onClick={() => openModal(svg)}
+                          >
+                            <div className={cn(
+                              "absolute top-2 right-2 transition-opacity z-10",
+                              selectedLogos.has(svg.id) ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            )}>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleLogoSelection(svg.id);
+                                }}
+                                className={cn(
+                                  "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors",
+                                  selectedLogos.has(svg.id)
+                                    ? "bg-primary border-primary text-primary-foreground"
+                                    : "border-border hover:border-primary"
+                                )}
+                              >
+                                {selectedLogos.has(svg.id) && (
+                                  <div className="w-2 h-2 bg-current rounded-full" />
+                                )}
+                              </button>
+                            </div>
+
+                            <div className="aspect-square flex items-center justify-center mb-3">
+                              <img
+                                src={getRoutePath(svg.route)}
+                                alt={svg.title}
+                                className="max-w-full max-h-full object-contain"
+                              />
+                            </div>
+                            <div className="text-center">
+                              <h3 className="font-medium text-sm truncate">{svg.title}</h3>
+                              <p className="text-xs text-muted-foreground">{svg.category}</p>
+                            </div>
+
+                            <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 rounded-xl">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCopy(svg, e);
+                                }}
+                                className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+                              >
+                                <Copy className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDownload(svg);
+                                }}
+                                className="p-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+                              >
+                                <Download className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {displayedCount < filteredSvgs.length && (
+                    <div className="text-center mt-12">
+                      <button
+                        onClick={() => setDisplayedCount(prev => Math.min(prev + 35, filteredSvgs.length))}
+                        className="px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity"
+                      >
+                        加载更多 ({filteredSvgs.length - displayedCount} 个)
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
-            </>
-          )}
+            </div>
+          </div>
         </main>
 
         <footer className="border-t border-border py-8 mt-16">

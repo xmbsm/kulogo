@@ -2,6 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 自动滚动动画 */
+@keyframes scrollRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-right {
+  animation: scrollRight 20s linear infinite;
+}
+
+.animate-scroll-left {
+  animation: scrollLeft 20s linear infinite;
+}
+
+/* 确保滚动容器在移动端也能正常工作 */
+@media (max-width: 1023px) {
+  .animate-scroll-right,
+  .animate-scroll-left {
+    animation-duration: 45s; /* 移动端速度更慢，确保流畅 */
+  }
+  
+  /* 确保滚动容器宽度足够 */
+  .animate-scroll-right > div,
+  .animate-scroll-left > div {
+    min-width: 100px; /* 移动端logo容器宽度更小 */
+  }
+  
+  /* 确保hero区域在移动端不会撑开页面 */
+  .relative.overflow-hidden.h-16 {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* 调整移动端logo大小 */
+  .relative.overflow-hidden.h-16 > .flex > div {
+    width: 96px; /* 移动端logo容器宽度 */
+    height: 96px; /* 移动端logo容器高度 */
+  }
+  
+  /* 调整hero区域高度 */
+  .relative.overflow-hidden.h-16 {
+    height: 32px; /* 移动端滚动容器高度 */
+  }
+}
+
+/* 隐藏滚动条 */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
