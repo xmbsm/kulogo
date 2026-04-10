@@ -3,6 +3,24 @@
 import { useEffect, useRef } from 'react';
 import { config } from '../config';
 
+// 声明谷歌广告全局类型
+declare global {
+  interface Window {
+    googletag?: {
+      cmd?: Array<() => void>;
+      defineSlot?: (adUnitPath: string, size: number[][], div: string) => {
+        addService: (service: any) => any;
+      };
+      pubads?: () => {
+        enableSingleRequest: () => void;
+      };
+      enableServices?: () => void;
+      display?: (div: string) => void;
+      _initialized?: boolean;
+    };
+  }
+}
+
 interface GoogleAdsProps {
   className?: string;
 }
@@ -16,29 +34,54 @@ export default function GoogleAds({ className = '' }: GoogleAdsProps) {
       return;
     }
 
+    // 检查是否在浏览器环境中
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
     // 加载谷歌广告脚本
-    if (!window.googletag) {
-      window.googletag = window.googletag || {};
-      window.googletag.cmd = window.googletag.cmd || [];
+    const googletag = (window.googletag || (window.googletag = {
+      cmd: []
+    })) as {
+      cmd: Array<() => void>;
+      defineSlot?: (adUnitPath: string, size: number[][], div: string) => {
+        addService: (service: any) => any;
+      };
+      pubads?: () => {
+        enableSingleRequest: () => void;
+      };
+      enableServices?: () => void;
+      display?: (div: string) => void;
+      _initialized?: boolean;
+    };
+    
+    if (!googletag._initialized) {
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${config.ads.google.clientId}`;
       document.head.appendChild(script);
 
       // 初始化谷歌广告
-      window.googletag.cmd.push(() => {
-        window.googletag.defineSlot(
-          `/21877759777/${config.ads.google.slotId}`,
-          [[300, 250], [336, 280], [728, 90], [300, 600], [160, 600]],
-          adRef.current?.id || ''
-        )?.addService(window.googletag.pubads());
-        window.googletag.pubads().enableSingleRequest();
-        window.googletag.enableServices();
+      googletag.cmd.push(() => {
+        const gtag = window.googletag;
+        if (gtag && gtag.defineSlot && gtag.pubads && gtag.enableServices) {
+          gtag.defineSlot(
+            `/21877759777/${config.ads.google.slotId}`,
+            [[300, 250], [336, 280], [728, 90], [300, 600], [160, 600]],
+            adRef.current?.id || ''
+          )?.addService(gtag.pubads());
+          gtag.pubads().enableSingleRequest();
+          gtag.enableServices();
+          (gtag as any)._initialized = true;
+        }
       });
     } else {
       // 如果已经加载了谷歌广告脚本，直接显示广告
-      window.googletag.cmd.push(() => {
-        window.googletag.display(adRef.current?.id || '');
+      googletag.cmd.push(() => {
+        const gtag = window.googletag;
+        if (gtag && gtag.display) {
+          gtag.display(adRef.current?.id || '');
+        }
       });
     }
   }, []);

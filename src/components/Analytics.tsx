@@ -5,6 +5,11 @@ import { config } from '../config';
 
 export default function Analytics() {
   useEffect(() => {
+    // 检查是否在浏览器环境中
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+
     // 加载百度统计
     if (config.analytics.baidu.enabled && config.analytics.baidu.siteId) {
       // 动态创建百度统计脚本
