@@ -1,10 +1,54 @@
 "use client";
 
-interface FooterProps {
-  isDarkMode?: boolean;
-}
+import { useState, useEffect } from 'react';
 
-export default function Footer({ isDarkMode = false }: FooterProps) {
+export default function Footer() {
+  // 服务端渲染时始终为 false，避免水合错误
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // 客户端水合后，从 data-dark-mode 属性读取主题模式，确保与服务端渲染一致
+  useEffect(() => {
+    const checkDarkMode = () => {
+      if (typeof window !== 'undefined') {
+        // 优先从 data-dark-mode 属性读取，确保与服务端渲染一致
+        const dataDarkMode = document.documentElement.getAttribute('data-dark-mode');
+        if (dataDarkMode !== null) {
+          setIsDarkMode(dataDarkMode === 'true');
+        } else {
+          // 其次从 localStorage 读取
+          const savedMode = localStorage.getItem('darkMode');
+          if (savedMode !== null) {
+            setIsDarkMode(savedMode === 'true');
+          } else {
+            // 最后检查 document.documentElement
+            setIsDarkMode(document.documentElement.classList.contains('dark'));
+          }
+        }
+      }
+    };
+
+    // 初始检查
+    checkDarkMode();
+
+    // 监听 localStorage 变化
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'darkMode') {
+        checkDarkMode();
+      }
+    };
+
+    // 监听 document 类名变化
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    // 添加 storage 事件监听器
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 py-12 mt-16">

@@ -18,7 +18,7 @@ import { config } from "../config";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [isDarkMode, setIsDarkMode] = useState(false);
+
   const [selectedLogos, setSelectedLogos] = useState<Set<number>>(new Set());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedLogo, setSelectedLogo] = useState<iSVG | null>(null);
@@ -62,10 +62,7 @@ export default function Home() {
     return result;
   }, [searchQuery, selectedCategory, sortOption]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
-  };
+
 
   // 当搜索或分类变化时，重置显示数量和排序选项
   useEffect(() => {
@@ -98,7 +95,9 @@ export default function Home() {
       console.log('Route is string:', route);
       return route;
     }
-    const path = isDarkMode ? route.dark : route.light;
+    // 使用全局主题状态
+    const isDark = document.documentElement.classList.contains('dark');
+    const path = isDark ? route.dark : route.light;
     console.log('Route is object, selected path:', path);
     return path;
   };
@@ -330,7 +329,7 @@ export default function Home() {
   };
 
   return (
-    <div className={cn("min-h-screen transition-colors duration-300", isDarkMode ? "dark" : "")}>
+    <div className="min-h-screen transition-colors duration-300">
       <div className="min-h-screen bg-background text-foreground">
         <Header selectedLogosCount={selectedLogos.size} onBatchDownload={handleBatchDownload} />
 
@@ -670,7 +669,7 @@ export default function Home() {
           </div>
         </main>
 
-        <Footer isDarkMode={isDarkMode} />
+        <Footer />
 
         <AnimatePresence>
           {isModalOpen && selectedLogo && (

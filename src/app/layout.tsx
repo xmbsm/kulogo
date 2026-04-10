@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { config } from "../config";
@@ -11,9 +12,9 @@ export const metadata: Metadata = {
   description: config.tdk.home.description,
   keywords: config.tdk.home.keywords,
   icons: {
-    icon: '/images/logo-night.svg',
-    shortcut: '/images/logo-night.svg',
-    apple: '/images/logo-night.svg',
+    icon: '/images/logo-night.png',
+    shortcut: '/images/logo-night.png',
+    apple: '/images/logo-night.png',
   },
 };
 
@@ -22,12 +23,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // 从 cookies 中读取主题模式
+  const cookieStore = cookies();
+  const darkMode = cookieStore.get('darkMode')?.value === 'true';
+
+  // 将主题模式添加到 document 中，以便客户端组件可以读取
+  const htmlClassName = darkMode ? 'dark' : '';
+
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" className={htmlClassName} data-dark-mode={darkMode.toString()}>
       <head>
         {/* 额外的图标配置 */}
-        <link rel="apple-touch-icon-precomposed" href="/images/logo-night.svg" />
-        <meta name="msapplication-TileImage" content="/images/logo-night.svg" />
+        <link rel="apple-touch-icon-precomposed" href="/images/logo-night.png" />
+        <meta name="msapplication-TileImage" content="/images/logo-night.png" />
       </head>
       <body className={inter.className}>
         {children}

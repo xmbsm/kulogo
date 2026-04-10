@@ -1,5 +1,5 @@
 // 自动生成，请勿手动编辑
-// Generated at: 2026/04/10 13:35:15
+// Generated at: 2026/04/10 14:44:37
 // 由 scripts/generate-svgs.ts 生成
 
 import type { iSVG } from "../types/svg";
