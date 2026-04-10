@@ -1,7 +1,15 @@
 import React from 'react';
+import type { Metadata } from "next";
+import { config } from "../../config";
 import Header from '../../components/Header';
 import Analytics from '../../components/Analytics';
 import Footer from '../../components/Footer';
+
+export const metadata: Metadata = {
+  title: config.tdk.sponsor.title,
+  description: config.tdk.sponsor.description,
+  keywords: config.tdk.sponsor.keywords,
+};
 
 const SponsorPage = () => {
   return (

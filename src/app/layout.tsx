@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { config } from "../config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SVG Logo Library",
-  description: "A beautiful library with SVG logos",
+  title: config.tdk.home.title,
+  description: config.tdk.home.description,
+  keywords: config.tdk.home.keywords,
+  icons: {
+    icon: '/images/logo-night.svg',
+    apple: '/images/logo-night.svg',
+  },
 };
 
 export default function RootLayout({
