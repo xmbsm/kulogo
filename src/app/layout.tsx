@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   keywords: config.tdk.home.keywords,
   icons: {
     icon: '/images/logo-night.svg',
+    shortcut: '/images/logo-night.svg',
     apple: '/images/logo-night.svg',
   },
 };
@@ -23,6 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
+      <head>
+        {/* 额外的图标配置 */}
+        <link rel="apple-touch-icon-precomposed" href="/images/logo-night.svg" />
+        <meta name="msapplication-TileImage" content="/images/logo-night.svg" />
+      </head>
       <body className={inter.className}>
         {children}
         <Toaster />
