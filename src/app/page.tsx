@@ -340,7 +340,7 @@ export default function Home() {
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-green-500 font-medium">{svgs.length}+ 矢量标志</span>
               </div>
-              <h1 className="text-4xl font-bold mb-4">
+              <h1 className="text-[2.35rem] lg:text-[2.35rem] font-bold mb-4">
                 国内外矢量标志收录
               </h1>
               <p className="text-muted-foreground mb-6">
@@ -434,7 +434,7 @@ export default function Home() {
               placeholder="搜索 Logo..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-accent border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-900 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 

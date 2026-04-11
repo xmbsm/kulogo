@@ -60,8 +60,8 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
   };
 
   return (
-    <div className="bg-background text-foreground">
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+    <div className="bg-[hsl(210_40%_96.1%)] dark:bg-gray-900 text-foreground">
+      <nav className="sticky top-0 z-50 bg-[hsl(210_40%_96.1%)]/80 dark:bg-gray-900/80 backdrop-blur-sm">
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1400px' }}>
           <div className="flex items-center h-16">
             <div className="flex items-center gap-8">
@@ -78,11 +78,11 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
               
               {/* 桌面端菜单 */}
               <div className="hidden md:flex items-center gap-6">
-                <a href="/" className="text-foreground hover:text-primary transition-colors">首页</a>
-                <a href="/about" className="text-foreground hover:text-primary transition-colors">关于我们</a>
-                <a href="/sponsor" className="text-foreground hover:text-primary transition-colors">赞助支持</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">GitHub</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">Twitter</a>
+                <a href="/" className="text-foreground hover:text-[#22c55e] transition-colors">首页</a>
+                <a href="/about" className="text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
+                <a href="/sponsor" className="text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
+                <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
+                <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
               </div>
             </div>
             
@@ -125,13 +125,13 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
         
         {/* 移动端菜单 */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-background shadow-lg z-40">
+          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-white dark:bg-gray-900 shadow-lg z-40">
             <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3" style={{ maxWidth: '1400px' }}>
-              <a href="/" className="block py-2 text-foreground hover:text-primary transition-colors">首页</a>
-              <a href="/about" className="block py-2 text-foreground hover:text-primary transition-colors">关于我们</a>
-              <a href="/sponsor" className="block py-2 text-foreground hover:text-primary transition-colors">赞助支持</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">GitHub</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">Twitter</a>
+              <a href="/" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">首页</a>
+              <a href="/about" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
+              <a href="/sponsor" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
+              <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
+              <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
             </div>
           </div>
         )}
