@@ -166,6 +166,9 @@ import type { iSVG } from "../types/svg";
 export const svgs: iSVG[] = [
 ${items.join(',\n')}
 ];
+
+// 最后更新时间
+export const lastUpdated: string = "${new Date().toISOString().split('T')[0]}";
 `;
 }
 

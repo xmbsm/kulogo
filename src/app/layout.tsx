@@ -25,7 +25,9 @@ export default function RootLayout({
 }) {
   // 从 cookies 中读取主题模式
   const cookieStore = cookies();
-  const darkMode = cookieStore.get('darkMode')?.value === 'true';
+  const darkModeCookie = cookieStore.get('darkMode');
+  // 确保 darkMode 被正确设置
+  const darkMode = darkModeCookie ? darkModeCookie.value === 'true' : false;
 
   // 将主题模式添加到 document 中，以便客户端组件可以读取
   const htmlClassName = darkMode ? 'dark' : '';

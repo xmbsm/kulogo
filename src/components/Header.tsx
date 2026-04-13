@@ -9,85 +9,80 @@ interface HeaderProps {
 }
 
 export default function Header({ selectedLogosCount = 0, onBatchDownload }: HeaderProps) {
-  // 服务端渲染时始终为 false，避免水合错误
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // 客户端水合后，从 data-dark-mode 属性读取主题模式，确保与服务端渲染一致
+  // 客户端水合后，读取主题模式
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // 优先从 data-dark-mode 属性读取，确保与服务端渲染一致
-      const dataDarkMode = document.documentElement.getAttribute('data-dark-mode');
-      if (dataDarkMode !== null) {
-        setIsDarkMode(dataDarkMode === 'true');
+    setIsClient(true);
+    
+    const updateTheme = () => {
+      // 优先从 localStorage 读取
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode !== null) {
+        setIsDarkMode(savedMode === 'true');
       } else {
-        // 其次从 localStorage 读取
-        const savedMode = localStorage.getItem('darkMode');
-        if (savedMode !== null) {
-          setIsDarkMode(savedMode === 'true');
-        } else {
-          // 再次从 cookies 读取
-          const cookieValue = document.cookie
-            .split('; ') 
-            .find(row => row.startsWith('darkMode=')) 
-            ?.split('=')[1];
-          if (cookieValue !== undefined) {
-            setIsDarkMode(cookieValue === 'true');
-          } else {
-            // 最后检查 document.documentElement
-            setIsDarkMode(document.documentElement.classList.contains('dark'));
-          }
-        }
+        // 其次检查 document 类名
+        setIsDarkMode(document.documentElement.classList.contains('dark'));
       }
-    }
+    };
+
+    updateTheme();
+
+    // 监听 localStorage 变化
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'darkMode') {
+        updateTheme();
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  // 当 isDarkMode 变化时，更新 localStorage、cookies 和文档类名
+  // 当 isDarkMode 变化时，更新所有相关状态
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // 更新 localStorage
+    if (isClient) {
       localStorage.setItem('darkMode', isDarkMode.toString());
+      document.cookie = `darkMode=${isDarkMode}; path=/; max-age=31536000; SameSite=Lax`;
       
-      // 更新 cookies
-      document.cookie = `darkMode=${isDarkMode}; path=/; max-age=31536000`;
-      
-      // 更新文档类名
       if (isDarkMode) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
     }
-  }, [isDarkMode]);
+  }, [isDarkMode, isClient]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode(prev => !prev);
   };
 
   return (
-    <div className="bg-background text-foreground">
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1400px' }}>
-          <div className="flex items-center h-16">
+    <div className="bg-white dark:bg-gray-900 text-foreground border-b border-gray-200 dark:border-gray-800 w-full">
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center h-20">
             <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2">
+              <a href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
                 <div className="w-8 h-8">
                   <img 
-                    src={isDarkMode ? "/images/logo-light.svg" : "/images/logo-night.svg"} 
+                    src="/images/logo.svg" 
                     alt="SVG Logo" 
                     className="w-full h-full object-contain"
                   />
                 </div>
                 <span className="font-bold text-xl">酷设计</span>
-              </div>
+              </a>
               
               {/* 桌面端菜单 */}
               <div className="hidden md:flex items-center gap-6">
-                <a href="/" className="text-foreground hover:text-primary transition-colors">首页</a>
-                <a href="/about" className="text-foreground hover:text-primary transition-colors">关于我们</a>
-                <a href="/sponsor" className="text-foreground hover:text-primary transition-colors">赞助支持</a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">GitHub</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors">Twitter</a>
+                <a href="/" className="text-foreground hover:text-[#22c55e] transition-colors">首页</a>
+                <a href="/about" className="text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
+                <a href="/sponsor" className="text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
+                <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
+                <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
               </div>
             </div>
             
@@ -113,7 +108,7 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg hover:bg-accent transition-colors"
               >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isClient ? (isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />) : <Moon className="w-5 h-5" />}
               </button>
               {/* 移动端菜单按钮 */}
               <button 
@@ -130,13 +125,13 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
         
         {/* 移动端菜单 */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-background shadow-lg z-40">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3" style={{ maxWidth: '1400px' }}>
-              <a href="/" className="block py-2 text-foreground hover:text-primary transition-colors">首页</a>
-              <a href="/about" className="block py-2 text-foreground hover:text-primary transition-colors">关于我们</a>
-              <a href="/sponsor" className="block py-2 text-foreground hover:text-primary transition-colors">赞助支持</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">GitHub</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-primary transition-colors">Twitter</a>
+          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-white dark:bg-gray-900 shadow-lg z-40 w-full">
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-4 space-y-3">
+              <a href="/" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">首页</a>
+              <a href="/about" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
+              <a href="/sponsor" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
+              <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
+              <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
             </div>
           </div>
         )}

@@ -22,18 +22,20 @@
 }
 
 .animate-scroll-right {
-  animation: scrollRight 20s linear infinite;
+  display: inline-flex;
+  animation: scrollRight 90s linear infinite;
 }
 
 .animate-scroll-left {
-  animation: scrollLeft 20s linear infinite;
+  display: inline-flex;
+  animation: scrollLeft 90s linear infinite;
 }
 
 /* 确保滚动容器在移动端也能正常工作 */
 @media (max-width: 1023px) {
   .animate-scroll-right,
   .animate-scroll-left {
-    animation-duration: 45s; /* 移动端速度更慢，确保流畅 */
+    animation-duration: 105s; /* 移动端速度更慢，确保流畅 */
   }
   
   /* 确保滚动容器宽度足够 */
