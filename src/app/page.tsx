@@ -333,145 +333,145 @@ export default function Home() {
       <div className="min-h-screen bg-background text-foreground">
         <Header selectedLogosCount={selectedLogos.size} onBatchDownload={handleBatchDownload} />
 
-        <main className="mx-auto px-4 sm:px-6 lg:px-8 py-0" style={{ maxWidth: '1400px' }}>
-          {/* Hero区域 - 全屏显示 */}
-          <div className="relative min-h-screen flex items-center justify-center mb-12 lg:mb-16 w-screen left-1/2 -translate-x-1/2 mt-0">
-            {/* 背景装饰 */}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-60"></div>
-              <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-green-100 dark:bg-green-900/20 rounded-full blur-3xl opacity-60"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/10 dark:to-pink-900/10 rounded-full blur-3xl"></div>
-            </div>
-            
-            {/* 内容区域 */}
-            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16">
-              <div className="flex flex-col items-center gap-12 lg:gap-16">
-                {/* 上方内容 */}
-                <div className="w-full max-w-3xl text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-full mb-6 mx-auto">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-green-600 dark:text-green-400 font-medium text-sm">{svgs.length}+ 矢量标志</span>
-                  </div>
-                  
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text">
-                    国内外矢量标志收录
-                  </h1>
-                  
-                  <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                    专注收录国内外矢量 LOGO，免费在线下载矢量 LOGO 素材，为设计师和开发者提供高质量的品牌标识资源。
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
+        {/* Hero区域 - 全屏显示 */}
+        <div className="relative min-h-[80vh] flex items-center justify-center mb-4 lg:mb-6 w-full mt-0">
+          {/* 背景装饰 */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-40 -left-40 w-80 h-80 bg-blue-100 dark:bg-blue-900/20 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-green-100 dark:bg-green-900/20 rounded-full blur-3xl opacity-60"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-900/10 dark:to-pink-900/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          {/* 内容区域 */}
+          <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+            <div className="flex flex-col items-center gap-12 lg:gap-16">
+              {/* 上方内容 */}
+              <div className="w-full max-w-3xl text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-full mb-6 mx-auto">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-green-600 dark:text-green-400 font-medium text-sm">{svgs.length}+ 矢量标志</span>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text">
+                  国内外矢量标志收录
+                </h1>
+                
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  专注收录国内外矢量 LOGO，免费在线下载矢量 LOGO 素材，为设计师和开发者提供高质量的品牌标识资源。
+                </p>
+                
+                <div className="flex flex-col sm:flex-row items-start gap-4 justify-center">
                     <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
                       <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-xl flex items-center justify-center">
                         <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       </div>
-                      <div>
+                      <div className="text-left">
                         <p className="text-sm text-muted-foreground">上次更新时间</p>
                         <p className="font-semibold text-gray-900 dark:text-white">{lastUpdated}</p>
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                {/* 下方Logo展示 - 滚动效果 */}
-                <div className="w-full">
-                  <div className="relative overflow-hidden">
-                    {/* 装饰性元素 */}
-                    <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl rotate-12"></div>
-                    <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl -rotate-12"></div>
-                    
-                    {/* 滚动Logo展示 */}
-                    <div className="relative p-8 w-full">
-                      {/* 第一行：向左滚动 */}
-                      <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
-                        <div className="animate-scroll-left">
-                          <div className="flex gap-4">
-                            {[...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(0, 15), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(0, 15), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(0, 15)].map((svg, index) => (
-                                <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                                  <img
-                                    src={getRoutePath(svg.route)}
-                                    alt={svg.title}
-                                    className="max-w-full max-h-full object-contain"
-                                  />
-                                </div>
-                              ))}
-                          </div>
+              </div>
+              
+              {/* 下方Logo展示 - 滚动效果 */}
+              <div className="w-full">
+                <div className="relative overflow-hidden">
+                  {/* 装饰性元素 */}
+                  <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl rotate-12"></div>
+                  <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl -rotate-12"></div>
+                  
+                  {/* 滚动Logo展示 */}
+                  <div className="relative p-8 w-full">
+                    {/* 第一行：向左滚动 */}
+                    <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
+                      <div className="animate-scroll-left">
+                        <div className="flex gap-4">
+                          {[...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(0, 15), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(0, 15), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(0, 15)].map((svg, index) => (
+                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                                <img
+                                  src={getRoutePath(svg.route)}
+                                  alt={svg.title}
+                                  className="max-w-full max-h-full object-contain"
+                                />
+                              </div>
+                            ))}
                         </div>
-                        {/* 左右渐变遮罩 */}
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
                       </div>
-                      
-                      {/* 第二行：向右滚动 */}
-                      <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
-                        <div className="animate-scroll-right">
-                          <div className="flex gap-4">
-                            {[...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(15, 30), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(15, 30), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(15, 30)].map((svg, index) => (
-                                <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                                  <img
-                                    src={getRoutePath(svg.route)}
-                                    alt={svg.title}
-                                    className="max-w-full max-h-full object-contain"
-                                  />
-                                </div>
-                              ))}
-                          </div>
-                        </div>
-                        {/* 左右渐变遮罩 */}
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
-                      </div>
-                      
-                      {/* 第三行：向左滚动 */}
-                      <div className="relative overflow-hidden h-[7.5rem] w-full">
-                        <div className="animate-scroll-left">
-                          <div className="flex gap-4">
-                            {[...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(30, 45), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(30, 45), ...svgs
-                              .sort((a, b) => b.id - a.id)
-                              .slice(30, 45)].map((svg, index) => (
-                                <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                                  <img
-                                    src={getRoutePath(svg.route)}
-                                    alt={svg.title}
-                                    className="max-w-full max-h-full object-contain"
-                                  />
-                                </div>
-                              ))}
-                          </div>
-                        </div>
-                        {/* 左右渐变遮罩 */}
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
-                      </div>
-                      
-
+                      {/* 左右渐变遮罩 */}
+                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
                     </div>
+                    
+                    {/* 第二行：向右滚动 */}
+                    <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
+                      <div className="animate-scroll-right">
+                        <div className="flex gap-4">
+                          {[...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(15, 30), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(15, 30), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(15, 30)].map((svg, index) => (
+                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                                <img
+                                  src={getRoutePath(svg.route)}
+                                  alt={svg.title}
+                                  className="max-w-full max-h-full object-contain"
+                                />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                      {/* 左右渐变遮罩 */}
+                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    
+                    {/* 第三行：向左滚动 */}
+                    <div className="relative overflow-hidden h-[7.5rem] w-full">
+                      <div className="animate-scroll-left">
+                        <div className="flex gap-4">
+                          {[...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(30, 45), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(30, 45), ...svgs
+                            .sort((a, b) => b.id - a.id)
+                            .slice(30, 45)].map((svg, index) => (
+                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                                <img
+                                  src={getRoutePath(svg.route)}
+                                  alt={svg.title}
+                                  className="max-w-full max-h-full object-contain"
+                                />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                      {/* 左右渐变遮罩 */}
+                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="relative mb-6">
+        <main className="mx-auto px-4 sm:px-6 lg:px-8 py-0" style={{ maxWidth: '1400px' }}>
+          <div className="relative mb-10">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <input
               type="text"
