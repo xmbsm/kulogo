@@ -60,10 +60,10 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
   };
 
   return (
-    <div className="bg-[hsl(210_40%_96.1%)] dark:bg-gray-900 text-foreground">
-      <nav className="sticky top-0 z-50 bg-[hsl(210_40%_96.1%)]/80 dark:bg-gray-900/80 backdrop-blur-sm">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1400px' }}>
-          <div className="flex items-center h-16">
+    <div className="bg-white dark:bg-gray-900 text-foreground border-b border-gray-200 dark:border-gray-800 w-full">
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center h-20">
             <div className="flex items-center gap-8">
               <a href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
                 <div className="w-8 h-8">
@@ -125,8 +125,8 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
         
         {/* 移动端菜单 */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-white dark:bg-gray-900 shadow-lg z-40">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3" style={{ maxWidth: '1400px' }}>
+          <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-white dark:bg-gray-900 shadow-lg z-40 w-full">
+            <div className="w-full px-4 sm:px-6 lg:px-8 py-4 space-y-3">
               <a href="/" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">首页</a>
               <a href="/about" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
               <a href="/sponsor" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
