@@ -41,6 +41,9 @@ importers:
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.6.1
+      tally-embed:
+        specifier: ^1.0.0
+        version: 1.0.0
       yaml:
         specifier: ^2.6.0
         version: 2.8.3
@@ -2198,6 +2201,9 @@ packages:
     resolution: {integrity: sha512-3ofp+LL8E+pK/JuPLPggVAIaEuhvIz4qNcf3nA1Xn2o/7fb7s/TYpHhwGDv1ZU3PkBluUVaF8PyCHcm48cKLWQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tally-embed@1.0.0:
+    resolution: {integrity: sha512-WivRtXaO1flTMv3OVMVAGsUL7ozmZ98X5vP8Grq1tb6ljkHQ/LebD68jwiVfJ6YQrWM5+VaAQc1JRBc6dK6jJQ==}
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -4701,6 +4707,8 @@ snapshots:
     transitivePeerDependencies:
       - tsx
       - yaml
+
+  tally-embed@1.0.0: {}
 
   thenify-all@1.6.0:
     dependencies:

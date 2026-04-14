@@ -23,6 +23,7 @@
     "shiki": "^1.24.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.4",
+    "tally-embed": "^1.0.0",
     "yaml": "^2.6.0"
   },
   "devDependencies": {

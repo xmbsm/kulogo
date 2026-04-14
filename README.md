@@ -160,9 +160,8 @@ svg-logo-library/
 
 **乔同学** - 专注于前端开发和设计资源整理，致力于为设计师和开发者提供高质量的品牌标识资源。
 
-- GitHub: [xmbsm](https://github.com/xmbsm)
 - 项目地址: [https://github.com/xmbsm/kulogo](https://github.com/xmbsm/kulogo)
-- 官方网站: [https://logo.kusheji.com](https://logo.kusheji.com)
+- 官方网站: [https://kusheji.com](https://kusheji.com)
 
 ## 开源协议
 
@@ -178,6 +177,13 @@ MIT License
 
 - Email: 1@kusheji.com
 - GitHub Issues: [项目 Issues](https://github.com/xmbsm/kulogo/issues)
+
+## 致谢
+
+- 开源项目 <a href="https://github.com/pheralb/svgl" target="_blank" rel="noopener noreferrer">svgl</a>
+- 开源项目 <a href="https://github.com/HeyHuazi/SVGLOGO" target="_blank" rel="noopener noreferrer">svglogo</a>
+- <a href="https://www.figma.com/community/file/916515339708288305" target="_blank" rel="noopener noreferrer">中国大学矢量校徽合集</a>
+- 预警信号 <a href="https://www.figma.com/community/file/1133299341246601360/icon50" target="_blank" rel="noopener noreferrer">ICON</a>
 
 ---
 

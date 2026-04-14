@@ -82,8 +82,8 @@ export default function Footer() {
         {/* 底部链接 */}
         <div className="border-t border-border pt-8 text-center">
           <div className="flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">菜单一</a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">菜单一</a>
+            <a href="https://dsxdh.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">大师兄导航</a>
+            <a href="https://ps.shijuefuhao.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">配色网</a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">菜单一</a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">菜单一</a>
             <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#22c55e] transition-colors">菜单一</a>

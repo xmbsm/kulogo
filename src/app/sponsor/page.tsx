@@ -43,7 +43,7 @@ const SponsorPage = () => {
             <ul className="list-disc pl-6 space-y-2">
               <li>GitHub Stars 和 Forks</li>
               <li>贡献代码或 LOGO 资源</li>
-              <li>通过 PayPal 或其他支付方式捐赠</li>
+              <li>通过支付宝或微信支付方式捐赠</li>
               <li>在社交媒体上分享我们的项目</li>
             </ul>
           </div>
