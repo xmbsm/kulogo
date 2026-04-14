@@ -1,25 +1,34 @@
-# SVG Logo 素材库
+# 酷设计 SVG Logo 素材库
 
-一个现代化的 SVG Logo 素材库，支持部署到多个平台。
+一个现代化的 SVG Logo 素材库，专注收录国内外矢量 LOGO，为设计师和开发者提供高质量的品牌标识资源。
+
+## 功能特点
+
+- 🔍 关键词搜索与分类筛选
+- 🌓 深色/浅色主题切换，支持自动保存主题偏好
+- 📋 一键复制 SVG 到剪贴板，支持复制 PNG 格式
+- ⬇️ 单个/批量下载 SVG
+- 🏷️ 支持多选和批量下载
+- 📱 响应式设计，适配移动端和桌面端
+- ✨ 流畅的动画效果，包括滚动 Logo 展示
+- 🎯 分类筛选，左侧边栏显示分类和数量
+- 🔄 排序功能，支持最近更新、A-Z 排序
+- 🏠 导航菜单，包含首页、关于我们、赞助支持等
+- 📊 集成百度统计和 Google 广告
+- 🎨 现代化 UI 设计，包含 Hero 区域滚动效果
 
 ## 技术栈
 
-- **Next.js 14** - React 框架
+- **Next.js 14** - React 框架，使用 App Router
 - **TypeScript** - 类型安全
 - **Tailwind CSS** - 样式框架
-- **Framer Motion** - 动画
+- **Framer Motion** - 动画库
 - **Sonner** - 通知组件
 - **JSZip** - 压缩文件
-
-## 功能特性
-
-- 🔍 关键词搜索与分类筛选
-- 🌓 深色/浅色主题切换
-- 📋 一键复制 SVG 到剪贴板
-- ⬇️ 单个/批量下载 SVG
-- 🏷️ 支持多选和批量下载
-- 📱 响应式设计
-- ✨ 流畅的动画效果
+- **Clipboard API** - 复制功能
+- **Canvas API** - PNG 复制功能
+- **LocalStorage** - 主题偏好存储
+- **Cookies** - 服务端主题检测
 
 ## 快速开始
 
@@ -102,19 +111,74 @@ pnpm generate:svg
 ```
 svg-logo-library/
 ├── public/
-│   └── library/          # SVG 资源文件
+│   ├── images/          # 网站图片资源
+│   └── library/         # SVG 资源文件
+│       ├── aigc/        # AI 产品
+│       ├── airline/     # 航空公司
+│       ├── company/     # 企业组织
+│       ├── cosmetic/    # 美妆品牌
+│       ├── goldJewelry/ # 黄金珠宝
+│       ├── other/       # 其他
+│       ├── pay/         # 金融支付
+│       ├── school/      # 大学校徽
+│       ├── social/      # 社交媒体
+│       ├── tools/       # 工具产品
+│       └── weather/     # 气象预警
 ├── scripts/
-│   ├── scan-svgs.ts     # 扫描 SVG
-│   └── generate-svgs.ts # 生成数据
+│   ├── scan-svgs.ts     # 扫描 SVG 文件
+│   ├── generate-svgs.ts # 生成 SVG 数据
+│   └── title-mappings.json # 标题映射
 ├── src/
 │   ├── app/            # Next.js 页面
-│   ├── data/           # 数据文件
-│   ├── lib/            # 工具函数
-│   └── types/          # 类型定义
-├── package.json
-└── vercel.json
+│   │   ├── about/      # 关于我们页面
+│   │   ├── sponsor/    # 赞助支持页面
+│   │   ├── globals.css # 全局样式
+│   │   ├── layout.tsx  # 根布局
+│   │   └── page.tsx    # 首页
+│   ├── components/      # 组件
+│   │   ├── Analytics.tsx    # 统计分析
+│   │   ├── Footer.tsx       # 页脚
+│   │   ├── GoogleAds.tsx    # Google 广告
+│   │   └── Header.tsx       # 头部导航
+│   ├── data/            # 数据文件
+│   │   ├── categories.ts # 分类数据
+│   │   └── svgs.ts       # SVG 数据
+│   ├── lib/             # 工具函数
+│   │   └── utils.ts      # 通用工具
+│   ├── types/           # 类型定义
+│   │   └── svg.ts        # SVG 类型
+│   └── config.ts        # 项目配置
+├── package.json         # 依赖管理
+├── next.config.js       # Next.js 配置
+├── tailwind.config.ts   # Tailwind 配置
+├── tsconfig.json        # TypeScript 配置
+├── vercel.json          # Vercel 配置
+└── wrangler.toml        # Cloudflare 配置
 ```
 
-## License
+## 作者介绍
 
-MIT
+**乔同学** - 专注于前端开发和设计资源整理，致力于为设计师和开发者提供高质量的品牌标识资源。
+
+- GitHub: [xmbsm](https://github.com/xmbsm)
+- 项目地址: [https://github.com/xmbsm/kulogo](https://github.com/xmbsm/kulogo)
+- 官方网站: [https://logo.kusheji.com](https://logo.kusheji.com)
+
+## 开源协议
+
+MIT License
+
+## 致谢
+
+感谢所有为项目贡献的开发者和设计师，以及提供 SVG Logo 资源的品牌方。
+
+## 联系方式
+
+如果您有任何问题或建议，欢迎通过以下方式联系我们：
+
+- Email: 1@kusheji.com
+- GitHub Issues: [项目 Issues](https://github.com/xmbsm/kulogo/issues)
+
+---
+
+**酷设计 SVG Logo 素材库** - 专注收录国内外矢量 LOGO，为设计师和开发者提供高质量的品牌标识资源。

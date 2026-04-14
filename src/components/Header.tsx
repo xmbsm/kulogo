@@ -63,7 +63,7 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
     <div className="bg-white dark:bg-gray-900 text-foreground border-b border-gray-200 dark:border-gray-800 w-full">
       <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm w-full">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-20">
+          <div className="flex items-center h-16 sm:h-20">
             <div className="flex items-center gap-8">
               <a href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
                 <div className="w-8 h-8">
@@ -78,11 +78,11 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
               
               {/* 桌面端菜单 */}
               <div className="hidden md:flex items-center gap-6">
-                <a href="/" className="text-foreground hover:text-[#22c55e] transition-colors">首页</a>
-                <a href="/about" className="text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
-                <a href="/sponsor" className="text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
-                <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
-                <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
+                <a href="/" className="text-foreground hover:text-[#16a34a] transition-colors">首页</a>
+                <a href="/about" className="text-foreground hover:text-[#16a34a] transition-colors">关于我们</a>
+                <a href="/sponsor" className="text-foreground hover:text-[#16a34a] transition-colors">赞助支持</a>
+                <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#16a34a] transition-colors">素材站</a>
+                <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-[#16a34a] transition-colors">网址导航</a>
               </div>
             </div>
             
@@ -127,11 +127,11 @@ export default function Header({ selectedLogosCount = 0, onBatchDownload }: Head
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 border-t border-border bg-white dark:bg-gray-900 shadow-lg z-40 w-full">
             <div className="w-full px-4 sm:px-6 lg:px-8 py-4 space-y-3">
-              <a href="/" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">首页</a>
-              <a href="/about" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">关于我们</a>
-              <a href="/sponsor" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">赞助支持</a>
-              <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">素材站</a>
-              <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#22c55e] transition-colors">网址导航</a>
+              <a href="/" className="block py-2 text-foreground hover:text-[#16a34a] transition-colors">首页</a>
+              <a href="/about" className="block py-2 text-foreground hover:text-[#16a34a] transition-colors">关于我们</a>
+              <a href="/sponsor" className="block py-2 text-foreground hover:text-[#16a34a] transition-colors">赞助支持</a>
+              <a href="https://sucai.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#16a34a] transition-colors">素材站</a>
+              <a href="https://dh.kusheji.com/" target="_blank" rel="noopener noreferrer" className="block py-2 text-foreground hover:text-[#16a34a] transition-colors">网址导航</a>
             </div>
           </div>
         )}

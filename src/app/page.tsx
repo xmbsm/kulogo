@@ -360,8 +360,8 @@ export default function Home() {
                   专注收录国内外矢量 LOGO，免费在线下载矢量 LOGO 素材，为设计师和开发者提供高质量的品牌标识资源。
                 </p>
                 
-                <div className="flex flex-col sm:flex-row items-start gap-4 justify-center">
-                    <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="flex items-center justify-center">
+                    <div className="flex items-center gap-3 px-6 py-3 bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-[rgba(0,0,0,0.01)] border border-gray-100 dark:border-gray-700">
                       <div className="w-10 h-10 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-xl flex items-center justify-center">
                         <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -369,25 +369,25 @@ export default function Home() {
                       </div>
                       <div className="text-left">
                         <p className="text-sm text-muted-foreground">上次更新时间</p>
-                        <p className="font-semibold text-gray-900 dark:text-white">{lastUpdated}</p>
+                        <p className="text-gray-900 dark:text-white">{lastUpdated}</p>
                       </div>
                     </div>
                   </div>
               </div>
               
               {/* 下方Logo展示 - 滚动效果 */}
-              <div className="w-full">
-                <div className="relative overflow-hidden">
+              <div className="w-full -mx-4 md:mx-0">
+                <div className="relative overflow-hidden w-full">
                   {/* 装饰性元素 */}
                   <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-3xl rotate-12"></div>
                   <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-3xl -rotate-12"></div>
                   
                   {/* 滚动Logo展示 */}
-                  <div className="relative p-8 w-full">
+                  <div className="relative p-0 md:p-8 w-full overflow-x-hidden">
                     {/* 第一行：向左滚动 */}
-                    <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
+                    <div className="relative overflow-hidden h-[6rem] sm:h-[7.5rem] mb-0.125 w-full">
                       <div className="animate-scroll-left">
-                        <div className="flex gap-4">
+                        <div className="flex gap-2 sm:gap-4 w-max">
                           {[...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(0, 15), ...svgs
@@ -395,7 +395,7 @@ export default function Home() {
                             .slice(0, 15), ...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(0, 15)].map((svg, index) => (
-                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                              <div key={`${svg.id}-${index}`} className="w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-3 sm:p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <img
                                   src={getRoutePath(svg.route)}
                                   alt={svg.title}
@@ -406,14 +406,14 @@ export default function Home() {
                         </div>
                       </div>
                       {/* 左右渐变遮罩 */}
-                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute left-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
                     </div>
                     
                     {/* 第二行：向右滚动 */}
-                    <div className="relative overflow-hidden h-[7.5rem] mb-0.5 w-full">
+                    <div className="relative overflow-hidden h-[6rem] sm:h-[7.5rem] mb-0.125 w-full">
                       <div className="animate-scroll-right">
-                        <div className="flex gap-4">
+                        <div className="flex gap-2 sm:gap-4 w-max">
                           {[...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(15, 30), ...svgs
@@ -421,7 +421,7 @@ export default function Home() {
                             .slice(15, 30), ...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(15, 30)].map((svg, index) => (
-                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                              <div key={`${svg.id}-${index}`} className="w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-3 sm:p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <img
                                   src={getRoutePath(svg.route)}
                                   alt={svg.title}
@@ -432,14 +432,14 @@ export default function Home() {
                         </div>
                       </div>
                       {/* 左右渐变遮罩 */}
-                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute left-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
                     </div>
                     
                     {/* 第三行：向左滚动 */}
-                    <div className="relative overflow-hidden h-[7.5rem] w-full">
+                    <div className="relative overflow-hidden h-[6rem] sm:h-[7.5rem] w-full">
                       <div className="animate-scroll-left">
-                        <div className="flex gap-4">
+                        <div className="flex gap-2 sm:gap-4 w-max">
                           {[...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(30, 45), ...svgs
@@ -447,7 +447,7 @@ export default function Home() {
                             .slice(30, 45), ...svgs
                             .sort((a, b) => b.id - a.id)
                             .slice(30, 45)].map((svg, index) => (
-                              <div key={`${svg.id}-${index}`} className="w-24 h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
+                              <div key={`${svg.id}-${index}`} className="w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl flex items-center justify-center p-3 sm:p-4 flex-shrink-0 border border-gray-100 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <img
                                   src={getRoutePath(svg.route)}
                                   alt={svg.title}
@@ -458,8 +458,8 @@ export default function Home() {
                         </div>
                       </div>
                       {/* 左右渐变遮罩 */}
-                      <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
-                      <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute left-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-r from-background to-transparent pointer-events-none z-10"></div>
+                      <div className="absolute right-0 top-0 bottom-0 w-4 sm:w-16 bg-gradient-to-l from-background to-transparent pointer-events-none z-10"></div>
                     </div>
                     
 
@@ -488,7 +488,7 @@ export default function Home() {
               <button
                 onClick={() => setSortOption("recent")}
                 className={cn(
-                  "px-3 py-1 rounded-full text-sm font-medium transition-all",
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all",
                   sortOption === "recent"
                     ? "bg-primary text-primary-foreground"
                     : "bg-accent hover:bg-accent/80"
@@ -499,7 +499,7 @@ export default function Home() {
               <button
                 onClick={() => setSortOption("alphabetical")}
                 className={cn(
-                  "px-3 py-1 rounded-full text-sm font-medium transition-all",
+                  "px-4 py-2 rounded-full text-sm font-medium transition-all",
                   sortOption === "alphabetical"
                     ? "bg-primary text-primary-foreground"
                     : "bg-accent hover:bg-accent/80"
@@ -780,14 +780,14 @@ export default function Home() {
                         e.stopPropagation();
                         handleCopy(selectedLogo, e);
                       }}
-                      className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity"
+                      className="flex items-center gap-2 px-6 py-3 bg-accent rounded-xl hover:bg-accent/80 transition-colors"
                     >
                       <Copy className="w-5 h-5" />
                       复制
                     </button>
                     <button
                       onClick={() => handleDownload(selectedLogo)}
-                      className="flex items-center gap-2 px-6 py-3 bg-accent rounded-xl hover:bg-accent/80 transition-colors"
+                      className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity"
                     >
                       <Download className="w-5 h-5" />
                       下载 SVG
