@@ -87,8 +87,7 @@ export default function Header() {
                 onClick={async () => {
                   try {
                     await TallyEmbed.openPopup("wza6xZ", {
-                      layout: "slidein",
-                      position: "bottom-right",
+                      layout: "modal",
                       width: 375,
                       onSubmit: (payload) => {
                         console.log("Form submitted:", payload);
@@ -158,8 +157,7 @@ export default function Header() {
                 onClick={async () => {
                   try {
                     await TallyEmbed.openPopup("wza6xZ", {
-                      layout: "slidein",
-                      position: "bottom-right",
+                      layout: "modal",
                       width: 375,
                       onSubmit: (payload) => {
                         console.log("Form submitted:", payload);
