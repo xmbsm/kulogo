@@ -37,8 +37,8 @@ export default function Home() {
   
   // 当分类变化时，滚动到logo展示区域
   useEffect(() => {
-    // 滚动到logo展示区域
-    if (logoDisplayRef.current) {
+    // 只有当selectedCategory不是初始值时才滚动
+    if (logoDisplayRef.current && selectedCategory !== "") {
       logoDisplayRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [selectedCategory]);
