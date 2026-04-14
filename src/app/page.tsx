@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, Sun, Moon, Copy, Download, ArrowUpRight, Github, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
@@ -31,6 +31,17 @@ export default function Home() {
   const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false); // 移动端分类菜单状态
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // 移动端导航菜单状态
   const [showBackToTop, setShowBackToTop] = useState(false); // 返回顶部按钮显示状态
+  
+  // 引用logo展示区域
+  const logoDisplayRef = React.useRef<HTMLDivElement>(null);
+  
+  // 当分类变化时，滚动到logo展示区域
+  useEffect(() => {
+    // 滚动到logo展示区域
+    if (logoDisplayRef.current) {
+      logoDisplayRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedCategory]);
 
   const filteredSvgs = useMemo(() => {
     let result = svgs.filter((svg) => {
@@ -471,7 +482,7 @@ export default function Home() {
         </div>
 
         <main className="mx-auto px-4 sm:px-6 lg:px-8 py-0" style={{ maxWidth: '1400px' }}>
-          <div className="relative mb-10">
+          <div className="relative mb-10" ref={logoDisplayRef}>
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <input
               type="text"
@@ -570,7 +581,9 @@ export default function Home() {
                 <h3 className="font-medium text-lg mb-4">分类筛选</h3>
                 <div className="space-y-2">
                   <button
-                    onClick={() => setSelectedCategory("")}
+                    onClick={() => {
+                        setSelectedCategory("");
+                      }}
                     className={cn(
                       "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
                       selectedCategory === ""
@@ -583,7 +596,9 @@ export default function Home() {
                   {categories.map((category) => (
                     <button
                       key={category.slug}
-                      onClick={() => setSelectedCategory(category.slug)}
+                      onClick={() => {
+                        setSelectedCategory(category.slug);
+                      }}
                       className={cn(
                         "w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all",
                         selectedCategory === category.slug
