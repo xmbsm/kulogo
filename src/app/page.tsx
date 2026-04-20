@@ -379,8 +379,8 @@ export default function Home() {
                         </svg>
                       </div>
                       <div className="text-left">
-                        <p className="text-sm text-muted-foreground">上次更新时间</p>
-                        <p className="text-gray-900 dark:text-white">{lastUpdated}</p>
+                        <p className="text-xs text-muted-foreground">上次更新时间</p>
+                        <p className="text-sm text-gray-900 dark:text-white">{lastUpdated}</p>
                       </div>
                     </div>
                   </div>
