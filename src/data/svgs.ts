@@ -3364,7 +3364,7 @@ export const svgs: iSVG[] = [
     category: "社交媒体",
     route: "/library/social/xiaoBot.svg",
     wordmark: "/library/social/xiaobot_wordmark.svg",
-    url: "https://xiaobot.net/p/DesignStroll",
+    url: "https://xiaobot.net/",
   },
   {
     id: 461,

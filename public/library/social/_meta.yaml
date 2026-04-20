@@ -30,7 +30,7 @@ items:
     url: https://podcasts.apple.com/cn/browse
   - title: 小报童
     file: xiaoBot.svg
-    url: https://xiaobot.net/p/DesignStroll
+    url: https://xiaobot.net/
     wordmark: xiaobot_wordmark.svg
   - title: 斗鱼
     file: douYu.svg
